@@ -10,4 +10,5 @@
 <!-- LOVABLE:END -->
 
 - The `/` route hosts the imported Origem app from `public/origem/`. Preserve its functionality and the Lovable/TanStack configuration when making changes.
+- Keep mobile installation manifest-only unless offline behavior is explicitly requested, so previews cannot retain stale app caches.
 
