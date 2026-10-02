@@ -1,18 +1,102 @@
 {
   "capabilities": [
-    {"capability":"code","source":"Imported Origem static app","outcome":"Preserve under public/origem and expose through the TanStack index route","status":"migrate","next_action":"Verify build and preview"},
-    {"capability":"schema","source":"Inspection found no database schema","outcome":"No migration required","status":"absent","next_action":"None"},
-    {"capability":"records","source":"Inspection found no record export","outcome":"Browser-only demonstration data remains in the static app","status":"absent","next_action":"None"},
-    {"capability":"auth identities","source":"Inspection found no authentication","outcome":"No migration required","status":"absent","next_action":"None"},
-    {"capability":"authorization","source":"Inspection found no authorization layer","outcome":"No migration required","status":"absent","next_action":"None"},
-    {"capability":"uploaded file bytes","source":"No uploaded file store detected","outcome":"No migration required","status":"absent","next_action":"None"},
-    {"capability":"external providers","source":"No external provider detected","outcome":"No migration required","status":"absent","next_action":"None"},
-    {"capability":"public endpoints","source":"Static Origem files","outcome":"Serve assets at /origem/*","status":"migrate","next_action":"Verify resource responses"},
-    {"capability":"callbacks","source":"None detected","outcome":"No migration required","status":"absent","next_action":"None"},
-    {"capability":"webhooks","source":"None detected","outcome":"No migration required","status":"absent","next_action":"None"},
-    {"capability":"schedules","source":"None detected","outcome":"No migration required","status":"absent","next_action":"None"},
-    {"capability":"secrets","source":"No environment variables detected","outcome":"No secrets required","status":"absent","next_action":"None"},
-    {"capability":"cutover","source":"Root-level imported files","outcome":"Relocate static app without changing public behavior","status":"migrate","next_action":"Remove root copies"},
-    {"capability":"verification","source":"Build and browser checks","outcome":"Pending after file relocation","status":"pending","next_action":"Run build signal and preview checks"}
+    {
+      "capability": "code",
+      "source": "Imported Origem static app",
+      "outcome": "Preserve under public/origem and expose through the TanStack index route",
+      "status": "verified",
+      "next_action": "None"
+    },
+    {
+      "capability": "schema",
+      "source": "Inspection found no database schema",
+      "outcome": "No migration required",
+      "status": "absent",
+      "next_action": "None"
+    },
+    {
+      "capability": "records",
+      "source": "Inspection found no record export",
+      "outcome": "Browser-only demonstration data remains in the static app",
+      "status": "absent",
+      "next_action": "None"
+    },
+    {
+      "capability": "auth identities",
+      "source": "Inspection found no authentication",
+      "outcome": "No migration required",
+      "status": "absent",
+      "next_action": "None"
+    },
+    {
+      "capability": "authorization",
+      "source": "Inspection found no authorization layer",
+      "outcome": "No migration required",
+      "status": "absent",
+      "next_action": "None"
+    },
+    {
+      "capability": "uploaded file bytes",
+      "source": "No uploaded file store detected",
+      "outcome": "No migration required",
+      "status": "absent",
+      "next_action": "None"
+    },
+    {
+      "capability": "external providers",
+      "source": "No external provider detected",
+      "outcome": "No migration required",
+      "status": "absent",
+      "next_action": "None"
+    },
+    {
+      "capability": "public endpoints",
+      "source": "Static Origem files",
+      "outcome": "Serve assets at /origem/*",
+      "status": "verified",
+      "next_action": "None"
+    },
+    {
+      "capability": "callbacks",
+      "source": "None detected",
+      "outcome": "No migration required",
+      "status": "absent",
+      "next_action": "None"
+    },
+    {
+      "capability": "webhooks",
+      "source": "None detected",
+      "outcome": "No migration required",
+      "status": "absent",
+      "next_action": "None"
+    },
+    {
+      "capability": "schedules",
+      "source": "None detected",
+      "outcome": "No migration required",
+      "status": "absent",
+      "next_action": "None"
+    },
+    {
+      "capability": "secrets",
+      "source": "No environment variables detected",
+      "outcome": "No secrets required",
+      "status": "absent",
+      "next_action": "None"
+    },
+    {
+      "capability": "cutover",
+      "source": "Root-level imported files",
+      "outcome": "Relocate static app without changing public behavior",
+      "status": "verified",
+      "next_action": "None"
+    },
+    {
+      "capability": "verification",
+      "source": "Build and browser checks",
+      "outcome": "Build passed; panel rendered with CSS and JavaScript; all /origem resources returned 200 with no browser errors",
+      "status": "verified",
+      "next_action": "None"
+    }
   ]
 }
