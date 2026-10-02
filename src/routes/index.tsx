@@ -76,7 +76,7 @@ function Index() {
     <>
       {loading ? <div className="flex min-h-screen items-center justify-center">Carregando…</div> : authorized ? <><iframe
         title="Origem — Gestão de Cafés Especiais"
-        src="/origem/index.html"
+        src="/origem/painel"
         className="fixed inset-0 block h-full w-full border-0 bg-background"
       /><Button className="fixed bottom-4 right-4 z-40" variant="secondary" onClick={exit}>Sair</Button></> : <main className="flex min-h-screen items-center justify-center bg-background px-5"><form onSubmit={enter} className="w-full max-w-sm space-y-5"><h1 className="text-3xl font-bold text-primary">origem</h1><label className="block text-sm font-medium">Código de acesso<input value={code} onChange={e => setCode(e.target.value)} required autoComplete="off" className="mt-2 flex h-11 w-full border border-input bg-background px-3" placeholder="Cole seu código" /></label><Button disabled={submitting} className="w-full">Entrar</Button>{accessError && <p role="alert" className="text-sm text-destructive">{accessError}</p>}</form></main>}
       {showInstall && mobilePlatform && (

@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { z } from 'zod';
+import type { Json } from '@/integrations/supabase/types';
 import { supabaseAdmin } from '@/integrations/supabase/client.server';
 import { fail, forbidden, originOK, tenant } from '@/lib/origem.server';
 
@@ -18,7 +19,7 @@ export const Route = createFileRoute('/api/public/origem/data')({ server: { hand
     if (!current) return forbidden();
     const parsed = z.object({ version: z.number().int().min(0), payload: dataShape }).safeParse(await request.json().catch(() => null));
     if (!parsed.success || JSON.stringify(parsed.data).length > 2_000_000) return fail(400, 'Dados inválidos ou grandes demais.');
-    const { data, error } = await supabaseAdmin.rpc('origem_save', { p_token_hash: current.tokenHash, p_version: parsed.data.version, p_payload: parsed.data.payload });
+    const { data, error } = await supabaseAdmin.rpc('origem_save', { p_token_hash: current.tokenHash, p_version: parsed.data.version, p_payload: parsed.data.payload as Json });
     if (error) return fail(error.message.includes('VERSION_CONFLICT') ? 409 : error.message.includes('ACCESS_DENIED') ? 401 : 503, error.message.includes('VERSION_CONFLICT') ? 'Dados alterados em outra janela. Recarregue antes de salvar.' : 'Acesso indisponível.');
     return Response.json({ version: data }, { headers: { 'Cache-Control': 'no-store' } });
   },

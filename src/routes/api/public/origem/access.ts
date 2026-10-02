@@ -12,7 +12,7 @@ export const Route = createFileRoute('/api/public/origem/access')({ server: { ha
     if (!originOK(request)) return fail(403);
     const parsed = z.object({ code: z.string().min(30).max(200) }).safeParse(await request.json().catch(() => null));
     if (!parsed.success) return forbidden();
-    const ip = request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    const ip = request.headers.get('cf-connecting-ip') || 'unknown';
     const ipHash = hash((process.env['SUPABASE_SERVICE_ROLE_KEY'] || '') + ':' + ip);
     // Atomic server-side rate-limit check, before code lookup.
     const { data: allowed, error: limitError } = await supabaseAdmin.rpc('origem_check_attempt', { p_ip_hash: ipHash, p_success: false });
