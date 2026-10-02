@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicOrigemAccessRouteImport } from './routes/api/public/origem/access'
+import { Route as ApiPublicOrigemDataRouteImport } from './routes/api/public/origem/data'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicOrigemAccessRoute = ApiPublicOrigemAccessRouteImport.update({
+  id: '/api/public/origem/access',
+  path: '/api/public/origem/access',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicOrigemDataRoute = ApiPublicOrigemDataRouteImport.update({
+  id: '/api/public/origem/data',
+  path: '/api/public/origem/data',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
+  '/api/public/origem/data': typeof ApiPublicOrigemDataRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
+  '/api/public/origem/data': typeof ApiPublicOrigemDataRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
+  '/api/public/origem/data': typeof ApiPublicOrigemDataRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/api/public/origem/access' | '/api/public/origem/data'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/api/public/origem/access' | '/api/public/origem/data'
+  id: '__root__' | '/' | '/api/public/origem/access' | '/api/public/origem/data'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicOrigemAccessRoute: typeof ApiPublicOrigemAccessRoute
+  ApiPublicOrigemDataRoute: typeof ApiPublicOrigemDataRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/origem/access': {
+      id: '/api/public/origem/access'
+      path: '/api/public/origem/access'
+      fullPath: '/api/public/origem/access'
+      preLoaderRoute: typeof ApiPublicOrigemAccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/origem/data': {
+      id: '/api/public/origem/data'
+      path: '/api/public/origem/data'
+      fullPath: '/api/public/origem/data'
+      preLoaderRoute: typeof ApiPublicOrigemDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicOrigemAccessRoute: ApiPublicOrigemAccessRoute,
+  ApiPublicOrigemDataRoute: ApiPublicOrigemDataRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

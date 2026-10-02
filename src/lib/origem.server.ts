@@ -39,16 +39,11 @@ export async function admin(request: Request) {
   } } });
   const { data: { user }, error } = await client.auth.getUser(auth[1]);
   if (error || !user) return null;
-  const { data: role, error: roleError } = await client.from('origem_admin_roles').select('role').eq('user_id', user.id).eq('role', 'admin').maybeSingle();
-  // Role reads must run with the validated user's bearer, never with the privileged client.
-  // The client above has no persisted session; use a scoped user client for this read.
-  if (roleError || !role) {
-    const scoped = createClient(url, key, { auth: { persistSession: false }, global: { headers: { Authorization: `Bearer ${auth[1]}` }, fetch: (input, init) => {
-      const headers = new Headers(init?.headers); headers.set('apikey', key); return fetch(input, { ...init, headers });
-    } } });
-    const result = await scoped.from('origem_admin_roles').select('role').eq('user_id', user.id).eq('role', 'admin').maybeSingle();
-    if (result.error || !result.data) return null;
-  }
+  const scoped = createClient(url, key, { auth: { persistSession: false }, global: { headers: { Authorization: `Bearer ${auth[1]}` }, fetch: (input, init) => {
+    const headers = new Headers(init?.headers); headers.set('apikey', key); return fetch(input, { ...init, headers });
+  } } });
+  const result = await scoped.from('origem_admin_roles').select('role').eq('user_id', user.id).eq('role', 'admin').maybeSingle();
+  if (result.error || !result.data) return null;
   return user.id;
 }
 export async function audit(actor: string, action: string, companyId?: string, detail?: string) {
