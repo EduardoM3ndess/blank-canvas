@@ -1,0 +1,5 @@
+- [x] Criar tabelas, acesso por código e isolamento dos dados no servidor.
+- [ ] Proteger a aplicação legada e ajustar persistência por empresa.
+- [ ] Construir tela de acesso e painel administrativo com faturas e histórico.
+- [ ] Validar cenários de segurança, persistência e Preview.
+- [ ] Atribuir role de administrador ao proprietário — aguarda email informado pelo proprietário.

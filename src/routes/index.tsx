@@ -23,6 +23,18 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [authorized, setAuthorized] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [code, setCode] = useState('');
+  const [accessError, setAccessError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  useEffect(() => { fetch('/api/public/origem/access', { cache: 'no-store' }).then(r => setAuthorized(r.ok)).catch(() => setAuthorized(false)).finally(() => setLoading(false)); }, []);
+  async function enter(e: React.FormEvent) {
+    e.preventDefault(); setSubmitting(true); setAccessError('');
+    try { const r = await fetch('/api/public/origem/access', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: code.trim() }) }); if (!r.ok) throw Error(); setCode(''); setAuthorized(true); }
+    catch { setAccessError('Código inválido ou acesso indisponível.'); } finally { setSubmitting(false); }
+  }
+  async function exit() { await fetch('/api/public/origem/access', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: '{}' }); setAuthorized(false); }
   const [mobilePlatform, setMobilePlatform] = useState<"android" | "ios" | null>(null);
   const [installPrompt, setInstallPrompt] = useState<InstallPromptEvent | null>(null);
   const [showInstall, setShowInstall] = useState(false);
@@ -62,11 +74,11 @@ function Index() {
 
   return (
     <>
-      <iframe
+      {loading ? <div className="flex min-h-screen items-center justify-center">Carregando…</div> : authorized ? <><iframe
         title="Origem — Gestão de Cafés Especiais"
-        src="/origem/index.html"
+        src="/origem/painel"
         className="fixed inset-0 block h-full w-full border-0 bg-background"
-      />
+      /><Button className="fixed bottom-4 right-4 z-40" variant="secondary" onClick={exit}>Sair</Button></> : <main className="flex min-h-screen items-center justify-center bg-background px-5"><form onSubmit={enter} className="w-full max-w-sm space-y-5"><h1 className="text-3xl font-bold text-primary">origem</h1><label className="block text-sm font-medium">Código de acesso<input value={code} onChange={e => setCode(e.target.value)} required autoComplete="off" className="mt-2 flex h-11 w-full border border-input bg-background px-3" placeholder="Cole seu código" /></label><Button disabled={submitting} className="w-full">Entrar</Button>{accessError && <p role="alert" className="text-sm text-destructive">{accessError}</p>}</form></main>}
       {showInstall && mobilePlatform && (
         <section
           aria-labelledby="install-title"

@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as OrigemPainelRouteImport } from './routes/origem/painel'
+import { Route as ApiPublicOrigemAccessRouteImport } from './routes/api/public/origem/access'
+import { Route as ApiPublicOrigemAdminRouteImport } from './routes/api/public/origem/admin'
+import { Route as ApiPublicOrigemDataRouteImport } from './routes/api/public/origem/data'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrigemPainelRoute = OrigemPainelRouteImport.update({
+  id: '/origem/painel',
+  path: '/origem/painel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicOrigemAccessRoute = ApiPublicOrigemAccessRouteImport.update({
+  id: '/api/public/origem/access',
+  path: '/api/public/origem/access',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicOrigemAdminRoute = ApiPublicOrigemAdminRouteImport.update({
+  id: '/api/public/origem/admin',
+  path: '/api/public/origem/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicOrigemDataRoute = ApiPublicOrigemDataRouteImport.update({
+  id: '/api/public/origem/data',
+  path: '/api/public/origem/data',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/origem/painel': typeof OrigemPainelRoute
+  '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
+  '/api/public/origem/admin': typeof ApiPublicOrigemAdminRoute
+  '/api/public/origem/data': typeof ApiPublicOrigemDataRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/origem/painel': typeof OrigemPainelRoute
+  '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
+  '/api/public/origem/admin': typeof ApiPublicOrigemAdminRoute
+  '/api/public/origem/data': typeof ApiPublicOrigemDataRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/origem/painel': typeof OrigemPainelRoute
+  '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
+  '/api/public/origem/admin': typeof ApiPublicOrigemAdminRoute
+  '/api/public/origem/data': typeof ApiPublicOrigemDataRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/reset-password'
+    | '/origem/painel'
+    | '/api/public/origem/access'
+    | '/api/public/origem/admin'
+    | '/api/public/origem/data'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/reset-password'
+    | '/origem/painel'
+    | '/api/public/origem/access'
+    | '/api/public/origem/admin'
+    | '/api/public/origem/data'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/reset-password'
+    | '/origem/painel'
+    | '/api/public/origem/access'
+    | '/api/public/origem/admin'
+    | '/api/public/origem/data'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  OrigemPainelRoute: typeof OrigemPainelRoute
+  ApiPublicOrigemAccessRoute: typeof ApiPublicOrigemAccessRoute
+  ApiPublicOrigemAdminRoute: typeof ApiPublicOrigemAdminRoute
+  ApiPublicOrigemDataRoute: typeof ApiPublicOrigemDataRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/origem/painel': {
+      id: '/origem/painel'
+      path: '/origem/painel'
+      fullPath: '/origem/painel'
+      preLoaderRoute: typeof OrigemPainelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/origem/access': {
+      id: '/api/public/origem/access'
+      path: '/api/public/origem/access'
+      fullPath: '/api/public/origem/access'
+      preLoaderRoute: typeof ApiPublicOrigemAccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/origem/admin': {
+      id: '/api/public/origem/admin'
+      path: '/api/public/origem/admin'
+      fullPath: '/api/public/origem/admin'
+      preLoaderRoute: typeof ApiPublicOrigemAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/origem/data': {
+      id: '/api/public/origem/data'
+      path: '/api/public/origem/data'
+      fullPath: '/api/public/origem/data'
+      preLoaderRoute: typeof ApiPublicOrigemDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  OrigemPainelRoute: OrigemPainelRoute,
+  ApiPublicOrigemAccessRoute: ApiPublicOrigemAccessRoute,
+  ApiPublicOrigemAdminRoute: ApiPublicOrigemAdminRoute,
+  ApiPublicOrigemDataRoute: ApiPublicOrigemDataRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

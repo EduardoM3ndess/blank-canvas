@@ -12,3 +12,6 @@
 - The `/` route hosts the imported Origem app from `public/origem/`. Preserve its functionality and the Lovable/TanStack configuration when making changes.
 - Keep mobile installation manifest-only unless offline behavior is explicitly requested, so previews cannot retain stale app caches.
 
+- Serve the legacy HTML through a session-gated server route, while its static CSS/JS remain public; direct HTML access must fail without a valid tenant session.
+- Store tenant documents as versioned JSON snapshots in Cloud; reject stale writes instead of silently overwriting concurrent changes.
+- Keep administrative roles separate from companies and authenticate every admin API request with a validated user bearer plus a role lookup.
