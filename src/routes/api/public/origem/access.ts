@@ -15,13 +15,15 @@ export const Route = createFileRoute('/api/public/origem/access')({ server: { ha
     const ip = request.headers.get('cf-connecting-ip') || 'unknown';
     const ipHash = hash((process.env['SUPABASE_SERVICE_ROLE_KEY'] || '') + ':' + ip);
     // Atomic server-side rate-limit check, before code lookup.
-    const { data: allowed, error: limitError } = await supabaseAdmin.rpc('origem_check_attempt', { p_ip_hash: ipHash, p_success: false });
+    const { data: allowed, error: limitError } = await supabaseAdmin.rpc('origem_check_attempt', { p_ip_hash: ipHash, p_success: null });
     if (limitError || !allowed) return forbidden();
     const { data: company } = await supabaseAdmin.from('origem_companies').select('id,name,blocked,expires_at').eq('code_hash', hash(parsed.data.code)).maybeSingle();
     if (!company || company.blocked || new Date(company.expires_at).getTime() <= Date.now()) {
+      await supabaseAdmin.rpc('origem_check_attempt', { p_ip_hash: ipHash, p_success: false });
       await audit('anonymous', 'login_failed');
       return forbidden();
     }
+    await supabaseAdmin.rpc('origem_check_attempt', { p_ip_hash: ipHash, p_success: true });
     const token = randomCode();
     const expires = new Date(Math.min(new Date(company.expires_at).getTime(), Date.now() + 7 * 86400000));
     const { error } = await supabaseAdmin.from('origem_sessions').insert({ company_id: company.id, token_hash: hash(token), expires_at: expires.toISOString() });
