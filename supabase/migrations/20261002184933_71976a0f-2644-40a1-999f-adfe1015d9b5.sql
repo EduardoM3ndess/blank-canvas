@@ -1,0 +1,3 @@
+CREATE FUNCTION public.origem_extend(p_company_id uuid, p_days integer) RETURNS timestamptz LANGUAGE plpgsql SECURITY DEFINER SET search_path = public AS $$ DECLARE result timestamptz; BEGIN IF p_days < 1 OR p_days > 3650 THEN RAISE EXCEPTION 'INVALID_DAYS'; END IF; UPDATE public.origem_companies SET expires_at=greatest(now(),expires_at)+(p_days * interval '1 day') WHERE id=p_company_id RETURNING expires_at INTO result; RETURN result; END $$;
+REVOKE ALL ON FUNCTION public.origem_extend(uuid,integer) FROM PUBLIC, anon, authenticated;
+GRANT EXECUTE ON FUNCTION public.origem_extend(uuid,integer) TO service_role;
