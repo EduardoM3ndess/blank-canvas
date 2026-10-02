@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as OrigemIndexHtmlRouteImport } from './routes/origem/index.html'
 import { Route as ApiPublicOrigemAccessRouteImport } from './routes/api/public/origem/access'
 import { Route as ApiPublicOrigemAdminRouteImport } from './routes/api/public/origem/admin'
@@ -18,6 +20,16 @@ import { Route as ApiPublicOrigemDataRouteImport } from './routes/api/public/ori
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrigemIndexHtmlRoute = OrigemIndexHtmlRouteImport.update({
@@ -43,6 +55,8 @@ const ApiPublicOrigemDataRoute = ApiPublicOrigemDataRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/origem/index/html': typeof OrigemIndexHtmlRoute
   '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
   '/api/public/origem/admin': typeof ApiPublicOrigemAdminRoute
@@ -50,6 +64,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/origem/index/html': typeof OrigemIndexHtmlRoute
   '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
   '/api/public/origem/admin': typeof ApiPublicOrigemAdminRoute
@@ -58,6 +74,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/origem/index/html': typeof OrigemIndexHtmlRoute
   '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
   '/api/public/origem/admin': typeof ApiPublicOrigemAdminRoute
@@ -67,6 +85,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
+    | '/reset-password'
     | '/origem/index/html'
     | '/api/public/origem/access'
     | '/api/public/origem/admin'
@@ -74,6 +94,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
+    | '/reset-password'
     | '/origem/index/html'
     | '/api/public/origem/access'
     | '/api/public/origem/admin'
@@ -81,6 +103,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
+    | '/reset-password'
     | '/origem/index/html'
     | '/api/public/origem/access'
     | '/api/public/origem/admin'
@@ -89,6 +113,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   OrigemIndexHtmlRoute: typeof OrigemIndexHtmlRoute
   ApiPublicOrigemAccessRoute: typeof ApiPublicOrigemAccessRoute
   ApiPublicOrigemAdminRoute: typeof ApiPublicOrigemAdminRoute
@@ -102,6 +128,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/origem/index/html': {
@@ -137,6 +177,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   OrigemIndexHtmlRoute: OrigemIndexHtmlRoute,
   ApiPublicOrigemAccessRoute: ApiPublicOrigemAccessRoute,
   ApiPublicOrigemAdminRoute: ApiPublicOrigemAdminRoute,
