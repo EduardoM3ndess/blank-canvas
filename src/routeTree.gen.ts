@@ -12,7 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as OrigemIndexHtmlRouteImport } from './routes/origem/index.html'
+import { Route as OrigemPainelRouteImport } from './routes/origem/painel'
 import { Route as ApiPublicOrigemAccessRouteImport } from './routes/api/public/origem/access'
 import { Route as ApiPublicOrigemAdminRouteImport } from './routes/api/public/origem/admin'
 import { Route as ApiPublicOrigemDataRouteImport } from './routes/api/public/origem/data'
@@ -32,9 +32,9 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OrigemIndexHtmlRoute = OrigemIndexHtmlRouteImport.update({
-  id: '/origem/index/html',
-  path: '/origem/index/html',
+const OrigemPainelRoute = OrigemPainelRouteImport.update({
+  id: '/origem/painel',
+  path: '/origem/painel',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicOrigemAccessRoute = ApiPublicOrigemAccessRouteImport.update({
@@ -57,7 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/origem/index/html': typeof OrigemIndexHtmlRoute
+  '/origem/painel': typeof OrigemPainelRoute
   '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
   '/api/public/origem/admin': typeof ApiPublicOrigemAdminRoute
   '/api/public/origem/data': typeof ApiPublicOrigemDataRoute
@@ -66,7 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/origem/index/html': typeof OrigemIndexHtmlRoute
+  '/origem/painel': typeof OrigemPainelRoute
   '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
   '/api/public/origem/admin': typeof ApiPublicOrigemAdminRoute
   '/api/public/origem/data': typeof ApiPublicOrigemDataRoute
@@ -76,7 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/origem/index/html': typeof OrigemIndexHtmlRoute
+  '/origem/painel': typeof OrigemPainelRoute
   '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
   '/api/public/origem/admin': typeof ApiPublicOrigemAdminRoute
   '/api/public/origem/data': typeof ApiPublicOrigemDataRoute
@@ -87,7 +87,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/reset-password'
-    | '/origem/index/html'
+    | '/origem/painel'
     | '/api/public/origem/access'
     | '/api/public/origem/admin'
     | '/api/public/origem/data'
@@ -96,7 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/reset-password'
-    | '/origem/index/html'
+    | '/origem/painel'
     | '/api/public/origem/access'
     | '/api/public/origem/admin'
     | '/api/public/origem/data'
@@ -105,7 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/reset-password'
-    | '/origem/index/html'
+    | '/origem/painel'
     | '/api/public/origem/access'
     | '/api/public/origem/admin'
     | '/api/public/origem/data'
@@ -115,7 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
-  OrigemIndexHtmlRoute: typeof OrigemIndexHtmlRoute
+  OrigemPainelRoute: typeof OrigemPainelRoute
   ApiPublicOrigemAccessRoute: typeof ApiPublicOrigemAccessRoute
   ApiPublicOrigemAdminRoute: typeof ApiPublicOrigemAdminRoute
   ApiPublicOrigemDataRoute: typeof ApiPublicOrigemDataRoute
@@ -144,11 +144,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/origem/index/html': {
-      id: '/origem/index/html'
-      path: '/origem/index/html'
-      fullPath: '/origem/index/html'
-      preLoaderRoute: typeof OrigemIndexHtmlRouteImport
+    '/origem/painel': {
+      id: '/origem/painel'
+      path: '/origem/painel'
+      fullPath: '/origem/painel'
+      preLoaderRoute: typeof OrigemPainelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/origem/access': {
@@ -179,7 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   ResetPasswordRoute: ResetPasswordRoute,
-  OrigemIndexHtmlRoute: OrigemIndexHtmlRoute,
+  OrigemPainelRoute: OrigemPainelRoute,
   ApiPublicOrigemAccessRoute: ApiPublicOrigemAccessRoute,
   ApiPublicOrigemAdminRoute: ApiPublicOrigemAdminRoute,
   ApiPublicOrigemDataRoute: ApiPublicOrigemDataRoute,
