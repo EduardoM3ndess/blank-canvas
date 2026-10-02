@@ -9,4 +9,5 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Keep the initial application as a single minimal route at `/`; this preserves the requested blank foundation.
+- The `/` route hosts the imported Origem app from `public/origem/`. Preserve its functionality and the Lovable/TanStack configuration when making changes.
+
