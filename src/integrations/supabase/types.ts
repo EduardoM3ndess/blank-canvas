@@ -14,13 +14,245 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      origem_admin_roles: {
+        Row: {
+          created_at: string
+          role: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          role: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          role?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      origem_attempts: {
+        Row: {
+          created_at: string
+          id: number
+          ip_hash: string
+          succeeded: boolean
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: never
+          ip_hash: string
+          succeeded: boolean
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: never
+          ip_hash?: string
+          succeeded?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      origem_audit: {
+        Row: {
+          action: string
+          actor: string
+          company_id: string | null
+          created_at: string
+          detail: string | null
+          id: number
+          updated_at: string
+        }
+        Insert: {
+          action: string
+          actor: string
+          company_id?: string | null
+          created_at?: string
+          detail?: string | null
+          id?: never
+          updated_at?: string
+        }
+        Update: {
+          action?: string
+          actor?: string
+          company_id?: string | null
+          created_at?: string
+          detail?: string | null
+          id?: never
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "origem_audit_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "origem_companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      origem_companies: {
+        Row: {
+          blocked: boolean
+          code_hash: string | null
+          contact: string | null
+          created_at: string
+          expires_at: string
+          id: string
+          last_access_at: string | null
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          blocked?: boolean
+          code_hash?: string | null
+          contact?: string | null
+          created_at?: string
+          expires_at: string
+          id?: string
+          last_access_at?: string | null
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          blocked?: boolean
+          code_hash?: string | null
+          contact?: string | null
+          created_at?: string
+          expires_at?: string
+          id?: string
+          last_access_at?: string | null
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      origem_data: {
+        Row: {
+          company_id: string
+          created_at: string
+          payload: Json
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          company_id: string
+          created_at?: string
+          payload?: Json
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          company_id?: string
+          created_at?: string
+          payload?: Json
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "origem_data_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: true
+            referencedRelation: "origem_companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      origem_invoices: {
+        Row: {
+          amount_cents: number
+          company_id: string
+          created_at: string
+          due_on: string
+          id: string
+          notes: string | null
+          paid_at: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount_cents: number
+          company_id: string
+          created_at?: string
+          due_on: string
+          id?: string
+          notes?: string | null
+          paid_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount_cents?: number
+          company_id?: string
+          created_at?: string
+          due_on?: string
+          id?: string
+          notes?: string | null
+          paid_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "origem_invoices_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "origem_companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      origem_sessions: {
+        Row: {
+          company_id: string
+          created_at: string
+          expires_at: string
+          id: string
+          revoked_at: string | null
+          token_hash: string
+          updated_at: string
+        }
+        Insert: {
+          company_id: string
+          created_at?: string
+          expires_at: string
+          id?: string
+          revoked_at?: string | null
+          token_hash: string
+          updated_at?: string
+        }
+        Update: {
+          company_id?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          revoked_at?: string | null
+          token_hash?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "origem_sessions_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "origem_companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      origem_is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
