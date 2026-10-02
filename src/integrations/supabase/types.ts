@@ -252,7 +252,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      origem_check_attempt: {
+        Args: { p_ip_hash: string; p_success: boolean }
+        Returns: boolean
+      }
+      origem_save: {
+        Args: { p_payload: Json; p_token_hash: string; p_version: number }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never
