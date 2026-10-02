@@ -3,10 +3,10 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Projeto em branco" },
-      { name: "description", content: "Base mínima para desenvolvimento." },
-      { property: "og:title", content: "Projeto em branco" },
-      { property: "og:description", content: "Base mínima para desenvolvimento." },
+      { title: "Origem — Gestão de Cafés Especiais" },
+      { name: "description", content: "Estoque, torrefação, pedidos e financeiro de cafés especiais em um só lugar." },
+      { property: "og:title", content: "Origem — Gestão de Cafés Especiais" },
+      { property: "og:description", content: "Estoque, torrefação, pedidos e financeiro de cafés especiais em um só lugar." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -15,5 +15,12 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  return <main className="min-h-screen bg-background" aria-label="" />;
+  return (
+    <iframe
+      title="Origem — Gestão de Cafés Especiais"
+      src="/origem/index.html"
+      style={{ position: "fixed", inset: 0, width: "100%", height: "100%", border: 0, display: "block", background: "#f6f7f3" }}
+    />
+  );
 }
+
