@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OrigemIndexHtmlRouteImport } from './routes/origem/index.html'
 import { Route as ApiPublicOrigemAccessRouteImport } from './routes/api/public/origem/access'
 import { Route as ApiPublicOrigemAdminRouteImport } from './routes/api/public/origem/admin'
 import { Route as ApiPublicOrigemDataRouteImport } from './routes/api/public/origem/data'
@@ -17,6 +18,11 @@ import { Route as ApiPublicOrigemDataRouteImport } from './routes/api/public/ori
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrigemIndexHtmlRoute = OrigemIndexHtmlRouteImport.update({
+  id: '/origem/index/html',
+  path: '/origem/index/html',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicOrigemAccessRoute = ApiPublicOrigemAccessRouteImport.update({
@@ -37,12 +43,14 @@ const ApiPublicOrigemDataRoute = ApiPublicOrigemDataRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/origem/index/html': typeof OrigemIndexHtmlRoute
   '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
   '/api/public/origem/admin': typeof ApiPublicOrigemAdminRoute
   '/api/public/origem/data': typeof ApiPublicOrigemDataRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/origem/index/html': typeof OrigemIndexHtmlRoute
   '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
   '/api/public/origem/admin': typeof ApiPublicOrigemAdminRoute
   '/api/public/origem/data': typeof ApiPublicOrigemDataRoute
@@ -50,6 +58,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/origem/index/html': typeof OrigemIndexHtmlRoute
   '/api/public/origem/access': typeof ApiPublicOrigemAccessRoute
   '/api/public/origem/admin': typeof ApiPublicOrigemAdminRoute
   '/api/public/origem/data': typeof ApiPublicOrigemDataRoute
@@ -58,18 +67,21 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/origem/index/html'
     | '/api/public/origem/access'
     | '/api/public/origem/admin'
     | '/api/public/origem/data'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/origem/index/html'
     | '/api/public/origem/access'
     | '/api/public/origem/admin'
     | '/api/public/origem/data'
   id:
     | '__root__'
     | '/'
+    | '/origem/index/html'
     | '/api/public/origem/access'
     | '/api/public/origem/admin'
     | '/api/public/origem/data'
@@ -77,6 +89,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  OrigemIndexHtmlRoute: typeof OrigemIndexHtmlRoute
   ApiPublicOrigemAccessRoute: typeof ApiPublicOrigemAccessRoute
   ApiPublicOrigemAdminRoute: typeof ApiPublicOrigemAdminRoute
   ApiPublicOrigemDataRoute: typeof ApiPublicOrigemDataRoute
@@ -89,6 +102,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/origem/index/html': {
+      id: '/origem/index/html'
+      path: '/origem/index/html'
+      fullPath: '/origem/index/html'
+      preLoaderRoute: typeof OrigemIndexHtmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/origem/access': {
@@ -117,6 +137,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  OrigemIndexHtmlRoute: OrigemIndexHtmlRoute,
   ApiPublicOrigemAccessRoute: ApiPublicOrigemAccessRoute,
   ApiPublicOrigemAdminRoute: ApiPublicOrigemAdminRoute,
   ApiPublicOrigemDataRoute: ApiPublicOrigemDataRoute,
