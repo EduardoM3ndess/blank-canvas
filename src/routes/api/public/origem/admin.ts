@@ -39,7 +39,8 @@ export const Route = createFileRoute('/api/public/origem/admin')({ server: { han
       const expires = new Date(now.getTime() + item.days * 86400000);
       const { data, error } = await supabaseAdmin.from('origem_companies').insert({ name: item.name, contact: item.contact || null, expires_at: expires.toISOString(), code_hash: hash(code) }).select('id').single();
       if (error || !data) return fail(503);
-      await supabaseAdmin.from('origem_data').insert({ company_id: data.id, payload: {}, version: 0 });
+      const created = await supabaseAdmin.from('origem_data').insert({ company_id: data.id, payload: {}, version: 0 });
+      if (created.error) return fail(503);
       await audit(actor, 'company_created', data.id, `${item.days} dias`);
       return Response.json({ code, id: data.id });
     }
