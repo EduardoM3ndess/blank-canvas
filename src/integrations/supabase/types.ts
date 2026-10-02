@@ -256,6 +256,10 @@ export type Database = {
         Args: { p_ip_hash: string; p_success: boolean }
         Returns: boolean
       }
+      origem_login: {
+        Args: { p_code_hash: string; p_ip_hash: string; p_token_hash: string }
+        Returns: Json
+      }
       origem_save: {
         Args: { p_payload: Json; p_token_hash: string; p_version: number }
         Returns: number
