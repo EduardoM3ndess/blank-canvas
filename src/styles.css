@@ -5,10 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 #lovable-badge {
-  display: nome !important;
+  display: none !important;
   visibility: hidden !important;
-  opacity: 0 !importat;
-  pointer-events: nome !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 @theme inline {
